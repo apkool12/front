@@ -4,15 +4,15 @@ import CLOSE from "../image/btn/close.png";
 import axios from "axios";
 
 const URL =
-  "http://localhost:8000";
+  "https://port-0-likelion-hackathon-lxmynpl6f586b2fd.sel5.cloudtype.app";
 
 const SelectionConfirmModal = ({
   img,
   text,
   onComplete,
   onClose,
-  showModal,
-  setShowModal,
+  cnt,
+  setCnt,
 }) => {
   const userId = localStorage.getItem("userid");
   const login_at = localStorage.getItem("loginat");
@@ -35,6 +35,8 @@ const SelectionConfirmModal = ({
       .then((res) => {
         if (res) {
           onComplete(); // Notify CheckBtn to update its state
+          setCnt(cnt + 1);
+          localStorage.setItem("complete_cnt", cnt + 1);
         }
       })
       .catch((error) => {

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios"; // Ensure axios is installed
 import style from "./CheckBtn.module.css";
 import SelectionConfirmModal from "./SelectionConfirmModal";
 
-// Import images as before
 import 유산소 from "../image/btn/유산소 운동하기.png";
 import 명상 from "../image/btn/명상하기.png";
 import 취침 from "../image/btn/7시간 이상 잠자기.png";
@@ -24,8 +22,8 @@ const imgData = [
   { name: "물 8컵 마시기", img: 물 },
   { name: "아침 식사하기", img: 식사 },
   { name: "샐러드 먹기", img: 샐러드 },
-  { name: "견과류 먹기", img: 견과류 },
-  { name: "생선 먹기", img: 생선 },
+  { name: "견과류 섭취하기", img: 견과류 },
+  { name: "생선 섭취하기", img: 생선 },
   { name: "야채주스 마시기", img: 야채주스 },
   { name: "발효식품 섭취하기", img: 발효식품 },
   { name: "단백질 섭취하기", img: 단백질 },
@@ -35,18 +33,16 @@ const imgData = [
   { name: "명상하기", img: 명상 },
   { name: "목욕하기", img: 목욕 },
   { name: "7시간 이상 잠자기", img: 취침 },
-  { name: "마사지 받기", img: 마사지 },
+  { name: "마사지 하기", img: 마사지 },
 ];
 
-const CheckBtn = ({ text }) => {
+const CheckBtn = ({ text, cnt, setCnt }) => {
   const [checked, setChecked] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [checkedCount, setCheckedCount] = useState(0);
-  const [totalCheckedCount, setTotalCheckedCount] = useState(0); // State for total checked count
 
   // Load the checked status from localStorage
   useEffect(() => {
-    const savedStatus = localStorage.getItem(`checked-${text}`)
+    const savedStatus = localStorage.getItem(`checked-${text}`);
     setChecked(savedStatus === "true");
   }, [text]);
 
@@ -54,35 +50,6 @@ const CheckBtn = ({ text }) => {
   useEffect(() => {
     localStorage.setItem(`checked-${text}`, checked);
   }, [checked, text]);
-
-  // Fetch data from API and update checkedCount and totalCheckedCount
-  useEffect(() => {
-    const userId = localStorage.getItem("userid");
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8000/calendar/${text}/`, {
-          withCredentials: true,
-          headers: { "X-User-Id": userId },
-        });
-        const data = response.data;
-        const today = new Date().toISOString().split('T')[0]; // Format: YYYY-MM-DD
-        const todayCount = data.dates.filter(date => date === today).length;
-
-        setCheckedCount(todayCount);
-
-        // Fetch total checked count
-        const totalResponse = await axios.get(`http://localhost:8000/calendar/totalCheckedCount`, {
-          withCredentials: true,
-          headers: { "X-User-Id": userId },
-        });
-        setTotalCheckedCount(totalResponse.data.totalCheckedCount);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, [text]);
 
   // Find the image based on the text
   const img = imgData.find((item) => item.name === text)?.img || null;
@@ -96,6 +63,7 @@ const CheckBtn = ({ text }) => {
   const handleComplete = () => {
     setChecked(true);
     setShowModal(false);
+    // localStorage.setItem("completed");
   };
 
   const handleModalClose = () => {
@@ -116,10 +84,10 @@ const CheckBtn = ({ text }) => {
           text={text}
           onComplete={handleComplete}
           onClose={handleModalClose}
+          cnt={cnt}
+          setCnt={setCnt}
         />
       )}
-      <span className={style.checkedCount}>Checked Today: {checkedCount}</span>
-      <span className={style.totalCheckedCount}>Total Checked: {totalCheckedCount}</span> {/* Display total checked count */}
     </div>
   );
 };

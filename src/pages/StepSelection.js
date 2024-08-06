@@ -21,24 +21,24 @@ import 생선 from "../image/btn/생선 먹기.png";
 import 마사지 from "../image/btn/마사지 하기.png";
 
 const URL =
-  "https://port-0-likelion-hackathon-lxmynpl6f586b2fd.sel5.cloudtype.app/";
+  "https://port-0-likelion-hackathon-lxmynpl6f586b2fd.sel5.cloudtype.app";
 
 const initialData = [
   { name: "물 8컵 마시기", img: 물 },
   { name: "아침 식사하기", img: 식사 },
   { name: "샐러드 먹기", img: 샐러드 },
-  { name: "견과류 먹기", img: 견과류 },
-  { name: "생선 먹기", img: 생선 },
+  { name: "견과류 섭취하기", img: 견과류 },
+  { name: "생선 섭취하기", img: 생선 },
   { name: "야채주스 마시기", img: 야채주스 },
-  { name: "발효식품 먹기", img: 발효식품 },
-  { name: "단백질 먹기", img: 단백질 },
+  { name: "발효식품 섭취하기", img: 발효식품 },
+  { name: "단백질 섭취하기", img: 단백질 },
   { name: "유산소 운동하기", img: 유산소 },
   { name: "근력 운동하기", img: 근력 },
   { name: "스트레칭 하기", img: 스트레칭 },
   { name: "명상하기", img: 명상 },
   { name: "목욕하기", img: 목욕 },
   { name: "7시간 이상 잠자기", img: 취침 },
-  { name: "마사지 받기", img: 마사지 },
+  { name: "마사지 하기", img: 마사지 },
 ];
 
 const StepSelection = ({ selec, setSelec, csrfToken, setCsrfToken }) => {
@@ -66,6 +66,7 @@ const StepSelection = ({ selec, setSelec, csrfToken, setCsrfToken }) => {
   const handleSubmit = async () => {
     try {
       const userId = localStorage.getItem("userid");
+      const curDate = localStorage.getItem("loginat");
 
       if (!userId) {
         throw new Error("User ID not found in local storage");
@@ -73,7 +74,7 @@ const StepSelection = ({ selec, setSelec, csrfToken, setCsrfToken }) => {
 
       const response = await axios.post(
         `${URL}/save-user-todo/`,
-        { user_todo: selec },
+        { user_todo: selec, date: curDate },
         {
           withCredentials: true,
           headers: {
@@ -94,15 +95,24 @@ const StepSelection = ({ selec, setSelec, csrfToken, setCsrfToken }) => {
     const fetchData = async () => {
       try {
         const userId = localStorage.getItem("userid");
+        const curDate = localStorage.getItem("loginat");
 
         if (!userId) {
           throw new Error("User ID not found in local storage");
         }
 
-        const response = await axios.get(`${URL}/read-user-todo/`, {
-          withCredentials: true,
-          headers: { "X-User-Id": userId },
-        });
+        const response = await axios.get(
+          `${URL}/read-user-todo/`,
+          {
+            withCredentials: true,
+            headers: { "X-User-Id": userId },
+          },
+          {
+            params: {
+              date: curDate,
+            },
+          }
+        );
 
         // Extract user_todo items from the response
         const userTodos = response.data.flatMap((item) => item.user_todo);
@@ -120,6 +130,18 @@ const StepSelection = ({ selec, setSelec, csrfToken, setCsrfToken }) => {
 
     fetchData();
   }, []);
+
+  if (filteredData.length === 0) {
+    return (
+      <div className={style.allSelectedPageWrapper}>
+        <span>
+          모두 도전하시는군요!
+          <br />더 추가할 항목이 없어요, 대단해요!
+        </span>
+        <button onClick={toBack}>돌아가기</button>
+      </div>
+    );
+  }
 
   return (
     <div className={style.flexWrapper}>

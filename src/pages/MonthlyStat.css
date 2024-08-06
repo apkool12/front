@@ -21,11 +21,7 @@
   background-repeat: no-repeat;
   background-position: top center;
 }
-
-body {
-  margin:0;
-}
-
+  
 .monthly-stat {
   max-width: 1200px;
   width: 60%;
@@ -85,6 +81,7 @@ body {
   padding: 20px 20px;
   cursor: pointer;
   font-size: 20px;
+  
 }
 
 .nav-button:hover {
@@ -94,17 +91,13 @@ body {
 .nav-button:first-of-type {
   margin-right: 20%;
   background: url('../image/btn/left.png');
+  background-repeat: no-repeat;
 }
 
 .nav-button:last-of-type {
   margin-left: 20%;
   background: url('../image/btn/right.png');
-}
-
-.nav-left {
-  width: 5px;
-  height: 5px;
-  background-color: red;
+  background-repeat: no-repeat;
 }
 
 .calendar {
@@ -215,13 +208,18 @@ body {
   border-radius: 13px;
 }
 
-.small-calendar td.filled {
-  background-color: #6a737d; /* 채워진 날짜 배경색 */
-  color: transparent; /* 글자 색상 조정 */
+.small-calendar td.empty {
+  background-color: transparent;
 }
 
-.small-calendar td.empty {
-  background-color: #ffffff; /* 비어있는 날짜 배경색 */
+.small-calendar td.completed {
+  background-color: #6A737D;
+  color: transparent;
+}
+
+.small-calendar td.not-completed {
+  background-color: #E9EAEA;
+  color: transparent
 }
 
 .legend {
@@ -304,7 +302,6 @@ body {
 }
 
 .activity-stat {
-  width: 100vw;
   display: flex;
   flex-direction: column;
   gap: 20px;

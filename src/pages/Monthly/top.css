@@ -1,0 +1,188 @@
+.top-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.top-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  margin-top: 15%;
+  gap: 100px;
+}
+
+.top-header img {
+  position: absolute;
+  top: 23%;
+  left: -16%;
+  width: 9%;
+  height: auto;
+}
+
+.top-header h3 {
+  font-size: 32px;
+  font-family: "nanum_bold";
+  display: flex;
+  margin-left: 1%;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.top-header span {
+  margin-left: 5%;
+  margin-right: 50%;
+  flex-shrink: 0;
+  color: #ff5c01;
+}
+
+.top-header p {
+  margin-left: -10%;
+  flex-shrink: 0;
+  color: #6a737d;
+}
+
+.top-activity-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.top-activity {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 15px;
+  padding: 100px;
+  gap: 30px;
+}
+
+.top-activity-card {
+  background-color: #adbcc9;
+  border-radius: 30px;
+  padding: 20px;
+  width: 300px;
+  color: #fff;
+  text-align: center;
+  flex: 1;
+  margin: 0 10px;
+}
+
+.top-activity-card.fruit {
+  background-color: #00c2ff;
+}
+
+.top-activity-card.muscle {
+  background-color: #778488;
+}
+
+.top-activity-card.walk {
+  background-color: #ff6347;
+}
+
+.top-activity-card.sleep {
+  background-color: #72e076;
+}
+
+.top-activity-card.noalcohol {
+  background-color: #f1d744;
+}
+
+.top-activity-card.salad {
+  background-color: #87b687;
+}
+
+.top-activity-card.water {
+  background-color: #1e90ff;
+}
+
+.top-activity-card.meditation {
+  background-color: #a6da2d;
+}
+
+.top-activity-card.massage {
+  background-color: #6a5acd;
+}
+
+.top-activity-card.fastfood {
+  background-color: #dc143c;
+}
+
+.top-activity-card.stretching {
+  background-color: #ff69b4;
+}
+
+.top-activity-card.nuts {
+  background-color: #f1b991;
+}
+
+.top-activity-card.eat {
+  background-color: #ffa500;
+}
+
+.top-activity-card.coffee {
+  background-color: #fab17d;
+}
+
+.top-activity-card img {
+  position: relative;
+  top: 5%;
+  transform: translate(-250%, 100%);
+  width: 80px;
+}
+
+.top-activity-card p {
+  bottom: 40%;
+  position: relative;
+  display: block;
+  margin-bottom: 10px;
+  font-size: 24px;
+  color: #fff;
+  font-weight: lighter;
+}
+
+.top-activity-card.sleep p {
+  bottom: 40%;
+  left: 10%;
+  position: relative;
+  display: block;
+  margin-bottom: 10px;
+  font-size: 24px;
+  color: #fff;
+  font-weight: lighter;
+}
+
+.top-activity-card.massage p {
+  bottom: 40%;
+  left: 10%;
+  position: relative;
+  display: block;
+  margin-bottom: 10px;
+  font-size: 24px;
+  color: #fff;
+  font-weight: lighter;
+}
+
+.top-activity-card.coffee p {
+  bottom: 40%;
+  left: 10%;
+  position: relative;
+  display: block;
+  margin-bottom: 10px;
+  font-size: 24px;
+  color: #fff;
+  font-weight: lighter;
+}
+
+.top-activity-card span {
+  bottom: 5%;
+  left: 35%;
+  position: relative;
+  display: block;
+  margin-top: 10px;
+  font-size: 42px;
+  font-weight: bold;
+}
